@@ -1,5 +1,5 @@
-#ifndef LEVELS_H
-#define LEVELS_H
+#ifndef GLOBALS_H
+#define GLOBALS_H
 
 #include "Arduboy.h"
 

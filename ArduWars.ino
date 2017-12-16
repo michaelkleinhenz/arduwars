@@ -1,87 +1,104 @@
-
-#include "Arduboy.h"
-#include "globals.h"
-#include "bitmaps.h"
-#include "levels.h"
-#include "display.h"
-
-// declare globals
-Arduboy arduboy;  
-
-// locals
-boolean start=false;
+/* 
+ * ArduWars - A Strategy Game for Arduboy
+ * Copyright (C) 2017 Michael Kleinhenz <michael@kleinhenz.net>
+ * 
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ */
 
 #include "pins_arduino.h" // Arduino pre-1.0 needs this
+#include "Arduboy.h"
 
-void intro()
-{
-  for(int i = -8; i < 28; i = i + 2)
-  {
-    arduboy.clear();
-    arduboy.setCursor(46, i);
-    arduboy.print("ARDUBOY");
-    arduboy.display();
-  }
+#include "globals.h"
+#include "bitmaps.h"
+#include "intro.h"
+#include "battle.h"
+#include "menu.h"
+#include "cutscene.h"
 
-  arduboy.tunes.tone(987, 160);
-  delay(160);
-  arduboy.tunes.tone(1318, 400);
-  delay(2000);
+// declare globals
+Arduboy arduboy;
+
+// declare screens
+Intro intro;
+Battle battle;
+Menu menu;
+Cutscene cutscene;
+
+// declare locals
+boolean inIntro = false;
+boolean inBattle = false;
+boolean inCutscene = false;
+byte selectedMenuItem = -1;
+
+// displays the intro
+void showIntro() {
+  inIntro = true;
+  intro.show();
 }
 
-/*
- arduboy.clear();
- arduboy.pressed(RIGHT_BUTTON)
- arduboy.drawRect(xPaddle, 63, 11, 1, 0);
- arduboy.pressed(A_BUTTON)
- arduboy.pressed(B_BUTTON);
- arduboy.drawPixel(xb,   yb,   0);
- (char)EEPROM.read(address + (5*i) + 2);
- EEPROM.write(address + (5*j) + 2, initials[0]);
- arduboy.setCursor(0,0);
- arduboy.setTextSize(2);
- arduboy.print("ARAKNOID");
-*/
-
-boolean pollFireButton(int n) {
-  for(int i = 0; i < n; i++) {
-    delay(15);
-    byte pad = arduboy.pressed(A_BUTTON) || arduboy.pressed(B_BUTTON);
-    if (pad==1) {
-      return true;
-    }
-  }
-  return false;
+// shows a battle
+void showBattle(byte mapId) {
+  inBattle = true;
+  battle.show(0);
 }
 
-boolean titleScreen() {
-  arduboy.clear();
-  arduboy.drawSlowXYBitmap(0, 0, title, 128, 64, 1);
-  arduboy.display();
-  if (pollFireButton(25)) {
-    return true;
-  }
+// shows a cutscene
+void showCutscene(byte cutsceneId) {
+  inCutscene = true;
+  cutscene.show(0);
 }
 
+// shows the main menu
+void showMenu() {
+  selectedMenuItem = -1;
+  menu.show();
+}
+
+// built-in: setup application
 void setup() {
   arduboy.begin();
   arduboy.setFrameRate(60);
   arduboy.display();
-  intro();
+  // we always start with the intro
+  showIntro();
 }
 
+// built-in: main game loop
 void loop() {
   // pause render until it's time for the next frame
   if (!(arduboy.nextFrame()))
     return;
 
-  drawMap();
-/*
-  while (!start) {
-    start = titleScreen();
+  // main loop, delegate to the active screen
+  if (inIntro) {
+    inIntro = intro.loop();
+    if (!inIntro) {
+      // after the intro, we start the battle (for now)
+      showBattle(0);
+    }
+    return;    
+  } else if (inBattle) {
+    inBattle = battle.loop();
+    return;    
+  } else if (inCutscene) {
+    inCutscene = cutscene.loop();
+    return;    
+  } else if (selectedMenuItem == -1) {
+    selectedMenuItem = menu.loop();
+    if (selectedMenuItem == 0) {
+      // some menu item was selected 
+      showBattle(0);
+    }
+    return;
   }
-*/
-  arduboy.display();
 }
 
 

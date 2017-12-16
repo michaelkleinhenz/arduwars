@@ -33,15 +33,16 @@
                 "/home/kleinhenz/Bibliothek/arduino-1.8.5/hardware/arduino/avr/libraries/SPI/src",
                 "/home/kleinhenz/Bibliothek/arduino-1.8.5/hardware/tools/avr/lib/gcc/avr/4.9.2/include",
                 "/home/kleinhenz/Bibliothek/arduino-1.8.5/hardware/arduino/avr/variants/leonardo",
-                "/home/kleinhenz/Bibliothek/arduino-1.8.5/hardware/arduino/avr/libraries/EEPROM/src"    
+                "/home/kleinhenz/Bibliothek/arduino-1.8.5/hardware/arduino/avr/libraries/EEPROM/src"
             ],
             "defines": [],
             "intelliSenseMode": "clang-x64",
             "browse": {
                 "path": [
-                    "${workspaceRoot}"
+                    "${workspaceRoot}",
+                    "/home/kleinhenz/Bibliothek/arduino/hardware/arduino/avr/cores/arduino"
                 ],
-                "limitSymbolsToIncludedHeaders": true,
+                "limitSymbolsToIncludedHeaders": false,
                 "databaseFilename": ""
             }
         },
