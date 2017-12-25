@@ -1,4 +1,6 @@
-#include "Arduboy.h"
+#include "Arduboy2.h"
+#include "Sprites.h"
+
 #include "globals.h"
 #include "bitmaps.h"  
 #include "intro.h"
@@ -21,13 +23,13 @@ boolean Intro::waitForButton(int n) {
 
 void Intro::show() {
   arduboy.clear();
-  arduboy.drawSlowXYBitmap(0, 0, title, 128, 64, 1);
+  sprites.drawSelfMasked(0, 0, title, 0);
   arduboy.display();
 }
 
 // cutscene loop, returns true as long as cutscene is running
 boolean Intro::loop() {
-  waitForButton(25);
+  waitForButton(100);
   arduboy.clear();
   return false;
 }

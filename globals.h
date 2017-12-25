@@ -1,8 +1,9 @@
 #ifndef GLOBALS_H
 #define GLOBALS_H
 
-#include "Arduboy.h"
+#include "Arduboy2.h"
 
-extern Arduboy arduboy;
+extern Arduboy2 arduboy;
+extern Sprites sprites;
 
 #endif

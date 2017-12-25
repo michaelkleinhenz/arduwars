@@ -1,4 +1,4 @@
-#include "Arduboy.h"
+#include "Arduboy2.h"
 #include "globals.h"
 #include "bitmaps.h"  
 #include "cutscene.h"

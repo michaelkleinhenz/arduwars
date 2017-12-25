@@ -8,11 +8,15 @@ class Battle
     void show(uint8_t mapId);
     boolean loop();
   private:
-    const unsigned char* getLevelMap();
+    const uint8_t getLevelXSize();
+    const uint8_t getLevelYSize();
+    const uint8_t* getLevelMap();
     const unsigned char* getUnitMap();
+    void checkKeys();
     void updateWindow();
     void drawWindow();
-    void drawTileAt(uint8_t x, uint8_t y, const uint8_t* bitmap);
+    void drawCursor();
+    void drawTileAt(uint8_t x, uint8_t y, uint8_t tileId);
     uint8_t xyToFlatCoordinate(uint8_t x, uint8_t y, uint8_t sizeX);
 };
 

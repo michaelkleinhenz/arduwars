@@ -14,7 +14,8 @@
  */
 
 #include "pins_arduino.h" // Arduino pre-1.0 needs this
-#include "Arduboy.h"
+#include "Arduboy2.h"
+#include "Sprites.h"
 
 #include "globals.h"
 #include "bitmaps.h"
@@ -24,7 +25,8 @@
 #include "cutscene.h"
 
 // declare globals
-Arduboy arduboy;
+Arduboy2 arduboy;
+Sprites sprites;
 
 // declare screens
 Intro intro;
@@ -67,6 +69,8 @@ void setup() {
   arduboy.begin();
   arduboy.setFrameRate(60);
   arduboy.display();
+  // init the debugging
+  Serial.begin(9600);
   // we always start with the intro
   showIntro();
 }
