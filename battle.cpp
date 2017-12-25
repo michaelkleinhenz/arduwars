@@ -3,9 +3,11 @@
 #include "Arduboy2.h"
 #include "Sprites.h"
 
+#include "progmem_read.h"
 #include "globals.h"
 #include "bitmaps.h"
 #include "levels.h"
+#include "units.h"
 #include "battle.h"
 
 const uint8_t WINDOW_SIZE_X = 7;
@@ -80,11 +82,6 @@ const uint8_t* Battle::getUnitMap() {
     return level_01_units;
 }
 
-/*
-      char buffer[250];
-      sprintf(buffer, "windowX: %i - windowY: %i - levelXSize: %i - levelYSize: %i - cursorX: %i - cursorY: %i\n", windowPosX, windowPosY, getLevelXSize(), getLevelYSize(), windowCursorPosX, windowCursorPosY);
-      Serial.print(buffer);
-*/
 
 void Battle::checkKeys() {
   if (arduboy.pressed(LEFT_BUTTON)) {
@@ -140,12 +137,22 @@ void Battle::drawCursor() {
   sprites.drawPlusMask(windowCursorPosX * 16, windowCursorPosY * 16, cursor_plus_mask, cursorAnimState);
 }
 
+
+
 void Battle::show(uint8_t newMapId) {
   mapId = newMapId;
   windowCursorPosX = 1;
   windowCursorPosY = 1;  
   windowPosX = 0;
   windowPosY = 0;
+
+      char buffer[250];
+      //sprintf(buffer, "windowX: %i - windowY: %i - levelXSize: %i - levelYSize: %i - cursorX: %i - cursorY: %i\n", windowPosX, windowPosY, getLevelXSize(), getLevelYSize(), windowCursorPosX, windowCursorPosY);
+      Unit unit0;
+      PROGMEM_readAnything(&units[0], unit0);
+      sprintf(buffer, "title: %s - desc: %s - val0: %i - val1: %i - val3: %i\n", unit0.name, unit0.description, unit0.attack, unit0.defend, unit0.spriteId);
+      Serial.print(buffer);
+
 }
 
 // battle loop, returns true as long as battle is running

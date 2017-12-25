@@ -1,6 +1,12 @@
 #include "Arduboy2.h"
 #include "levels.h"
 
+static const Terrain terrains[] PROGMEM = {
+  { "Valley",  0,  10 },
+  { "Forest",  1,  20 },
+  { "Mountains",  2,  30 },
+ };
+ 
 const uint8_t PROGMEM level_00_sizeX = 20;
 const uint8_t PROGMEM level_00_sizeY = 20;
 const unsigned char PROGMEM level_00_env[level_00_sizeY*level_00_sizeX] = {
