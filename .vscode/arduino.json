@@ -1,5 +1,5 @@
 {
-    "board": "arduino:avr:leonardo",
+    "board": "arduboy:avr:arduboy",
     "port": "/dev/ttyACM0",
     "sketch": "ArduWars.ino"
 }

@@ -26,6 +26,8 @@
         {
             "name": "Linux",
             "includePath": [
+                "/home/kleinhenz/.arduino15/packages/arduboy/tools/**",
+                "/home/kleinhenz/.arduino15/packages/arduboy/hardware/avr/1.0.0/**",
                 "${workspaceRoot}",
                 "/home/kleinhenz/Bibliothek/arduino/hardware/arduino/avr/cores/arduino",
                 "/home/kleinhenz/Arduino/libraries/Arduboy/src",
@@ -45,7 +47,8 @@
                 ],
                 "limitSymbolsToIncludedHeaders": false,
                 "databaseFilename": ""
-            }
+            },
+            "forcedInclude": []
         },
         {
             "name": "Win32",
@@ -68,5 +71,5 @@
             }
         }
     ],
-    "version": 3
+    "version": 4
 }
