@@ -86,7 +86,8 @@ void loop() {
     inIntro = intro.loop();
     if (!inIntro) {
       // after the intro, we start the battle (for now)
-      showBattle(0);
+      //showBattle(0);
+      showCutscene(0);
     }
     return;    
   } else if (inBattle) {

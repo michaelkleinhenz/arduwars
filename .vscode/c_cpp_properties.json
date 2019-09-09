@@ -28,6 +28,7 @@
             "includePath": [
                 "/home/kleinhenz/.arduino15/packages/arduboy/tools/**",
                 "/home/kleinhenz/.arduino15/packages/arduboy/hardware/avr/1.0.0/**",
+                "/home/kleinhenz/Arduino/libraries/ArdBitmap/src",
                 "${workspaceRoot}",
                 "/home/kleinhenz/Bibliothek/arduino/hardware/arduino/avr/cores/arduino",
                 "/home/kleinhenz/Arduino/libraries/Arduboy/src",
